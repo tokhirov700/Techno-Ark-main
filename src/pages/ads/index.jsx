@@ -1,8 +1,10 @@
-
+import NotFoundimage from '../../assets/NotFound.jpg'
 
 const index = () => {
   return (
-    <div>index</div>
+    <div>
+    <img src={NotFoundimage} alt="not-found" />
+  </div>
   )
 }
 

@@ -124,6 +124,7 @@ const Index = () => {
         {
             title: 'Date',
             dataIndex: 'createdAt',
+            render: (date) => new Date(date).toLocaleDateString('en-GB').replace(/\//g, '.'), 
         },
         {
             title: 'Action',

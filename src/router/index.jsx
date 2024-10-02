@@ -17,6 +17,7 @@ import {
     Ads,
     BrandCategory,
     ProductDetails,
+    Notfound
 } from '@pages';
 
 const Index = () => {
@@ -38,6 +39,8 @@ const Index = () => {
                     <Route path="settings" element={<Settings />} />
 
                 </Route>
+
+                <Route path="*" element={<Notfound />} />
             </Route>
         )
     )

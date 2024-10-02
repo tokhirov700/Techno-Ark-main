@@ -10,6 +10,7 @@ import ProductDetails from './product-details';
 import Ads from './ads';
 import Stock from './stock';
 import Settings from './settings';
+import Notfound from './not-found';
 
 export {
     SignUp,
@@ -23,5 +24,7 @@ export {
     Stock,
     Ads,
     BrandCategory,
-    ProductDetails
+    ProductDetails,
+    Notfound
+
 }
