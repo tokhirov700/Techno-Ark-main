@@ -1,7 +1,5 @@
-// PopconfirmDelete.js
-import React from 'react';
 import { Popconfirm, Button } from 'antd';
-import { DeleteOutlined, EditOutlined, EnterOutlined } from '@ant-design/icons';
+import { DeleteOutlined,  } from '@ant-design/icons';
 const PopconfirmDelete = ({ onConfirm, onCancel, id ,title}) => (
     <Popconfirm
         title={title}

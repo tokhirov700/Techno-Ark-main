@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input, Space, } from 'antd';
-import { DeleteOutlined, EditOutlined, EnterOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, } from '@ant-design/icons';
 import { useNavigate, NavLink, useParams, useLocation } from 'react-router-dom'
 import { GlobalTable, } from '@components';
 import { SubCategoryModal } from '@modals'
@@ -22,8 +22,6 @@ const Index = () => {
         page: 1
     })
 
-    //========= get from query =========
-
     useEffect(() => {
         const params = new URLSearchParams(search)
         let page = Number(params.get("page")) || 1
@@ -35,8 +33,6 @@ const Index = () => {
         }))
     }, [search])
 
-
-    // ============ Table ==============
     const handleTableChange = (pagination) => {
         const { current, pageSize } = pagination
         setParams((prev) => ({
@@ -51,7 +47,7 @@ const Index = () => {
         navigate(`?${searchParams}`)
     }
 
-    //  ============ Modal ===========
+
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -63,7 +59,6 @@ const Index = () => {
         setUpdate({})
     };
 
-    // ============ get Data ============
     const getData = async () => {
         try {
             const res = await subCategory.get(id);
@@ -80,7 +75,7 @@ const Index = () => {
         getData();
     }, [params]);
 
-    // =========== edit Data ===========
+
     const editData = (item) => {
         setUpdate(item);
         showModal()
@@ -89,7 +84,6 @@ const Index = () => {
     };
 
 
-    // ======== delete Data ========= 
     const deleteData = async (id) => {
         const res = await subCategory.delete(id);
         if (res.status === 200) {
@@ -97,7 +91,6 @@ const Index = () => {
         }
     };
 
-    //========= get categories ============
     const getCategories = async () => {
         try {
             const res = await category.get();
@@ -173,7 +166,7 @@ const Index = () => {
                     pageSizeOptions: ['2', '3', '4', '6']
                 }}
             />
-            {/* <a href="/admin-panel/categories"> Back to Categories</a> */}
+
             <NavLink to={"/admin-panel/categories"} style={{ color: "orangered", width: "100px", padding: "9px", borderRadius: "10px", fontSize: "18px", textDecorationLine: "underline", marginTop: "20px" }} > Back to Categories</NavLink>
         </>
     );

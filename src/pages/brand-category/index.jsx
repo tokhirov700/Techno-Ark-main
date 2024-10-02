@@ -1,7 +1,7 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input, Space, } from 'antd';
-import { EditOutlined,  } from '@ant-design/icons';
-import { useNavigate,  useLocation } from 'react-router-dom'
+import { EditOutlined, } from '@ant-design/icons';
+import { useNavigate, useLocation } from 'react-router-dom'
 import { GlobalTable, } from '@components';
 import { BrandCategoryModal } from '@modals'
 import { brandCategory, brands } from '@service';
@@ -21,8 +21,6 @@ const Index = () => {
         page: 1
     })
 
-    //========= get from query =========
-
     useEffect(() => {
         const params = new URLSearchParams(search)
         let page = Number(params.get("page")) || 1
@@ -34,8 +32,6 @@ const Index = () => {
         }))
     }, [search])
 
-
-    // ============ Table ==============
     const handleTableChange = (pagination) => {
         const { current, pageSize } = pagination
         setParams((prev) => ({
@@ -50,7 +46,6 @@ const Index = () => {
         navigate(`?${searchParams}`)
     }
 
-    //  ============ Modal ===========
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -62,7 +57,6 @@ const Index = () => {
         setUpdate({})
     };
 
-    // ============ get Data ============
     const getData = async () => {
         try {
             const res = await brandCategory.get();
@@ -84,12 +78,11 @@ const Index = () => {
     const editData = (item) => {
         setUpdate(item);
         showModal()
-  
+
 
     };
 
 
-    // ======== delete Data ========= 
     const deleteData = async (id) => {
         const res = await brandCategory.delete(id);
         if (res.status === 200) {
@@ -97,13 +90,12 @@ const Index = () => {
         }
     };
 
-    //========= get categories ============
     const getBrands = async () => {
         try {
             const res = await brands.get();
             const fetchedCategories = res?.data?.data?.brands;
             setParentbrand(fetchedCategories);
-         
+
         } catch (error) {
             console.log(error);
         }
@@ -125,6 +117,7 @@ const Index = () => {
         {
             title: 'Date',
             dataIndex: 'createdAt',
+            render: (date) => new Date(date).toLocaleDateString('en-GB').replace(/\//g, '.'),
         },
         {
             title: 'Action',

@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Button, Input, Space, } from 'antd';
-import { DeleteOutlined, EditOutlined, EnterOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import { useNavigate, NavLink, useParams, useLocation } from 'react-router-dom'
+import {  EditOutlined,} from '@ant-design/icons';
+import { useNavigate,  useLocation } from 'react-router-dom'
 import { GlobalTable, } from '@components';
 import { BrandsModal } from '@modals'
 import { brands, category } from '@service';
 import { ConfirmDelete } from '@confirmation';
 
 const Index = () => {
-  const { id } = useParams();
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [update, setUpdate] = useState({});
@@ -33,7 +32,6 @@ const Index = () => {
     }))
   }, [search])
 
-  // ============ Table ==============
   const handleTableChange = (pagination) => {
     const { current, pageSize } = pagination
     setParams((prev) => ({
@@ -48,7 +46,6 @@ const Index = () => {
     navigate(`?${searchParams}`)
   }
 
-  //  ============ Modal ===========
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -60,7 +57,6 @@ const Index = () => {
     setUpdate({})
   };
 
-  // ============ get Data ============
   const getData = async () => {
     try {
       const res = await brands.get(params);
@@ -68,7 +64,7 @@ const Index = () => {
         const dataSetter = res?.data?.data?.brands
         setData(dataSetter);
         setTotal(res?.data?.data?.count)
-        // console.log(data, "data");
+    
 
       }
     } catch (error) {
@@ -80,16 +76,15 @@ const Index = () => {
     getData();
   }, [params]);
 
-  // =========== edit Data ===========
   const editData = (item) => {
     setUpdate(item);
     showModal()
-    // console.log(item);
+
 
   };
 
 
-  // ======== delete Data ========= 
+  
   const deleteData = async (id) => {
     const res = await brands.delete(id);
     if (res.status === 200) {
@@ -97,13 +92,12 @@ const Index = () => {
     }
   };
 
-  //========= get categories ============
   const getCategories = async () => {
     try {
       const res = await category.get(params);
       const fetchedCategories = res?.data?.data?.categories;
       setCategories(fetchedCategories);
-      // console.log(categories);
+  
 
     } catch (error) {
       console.log(error);

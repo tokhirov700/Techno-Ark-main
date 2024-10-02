@@ -10,7 +10,7 @@ import {
 
 
 export const adminRights = [
-    { path: '/admin-panel', label: 'proucts', icon: <DropboxOutlined style={{ fontSize: "22px" }} /> },
+    { path: '/admin-panel', label: 'Proucts', icon: <DropboxOutlined style={{ fontSize: "22px" }} /> },
     { path: '/admin-panel/categories', label: 'Categories', icon: < AppstoreOutlined style={{ fontSize: "22px" }} /> },
     { path: '/admin-panel/brands', label: 'Brands', icon: < SlackOutlined style={{ fontSize: "22px" }} /> },
     { path: '/admin-panel/brand-category', label: 'Brand category', icon: <ProductOutlined style={{ fontSize: "22px" }} /> },
