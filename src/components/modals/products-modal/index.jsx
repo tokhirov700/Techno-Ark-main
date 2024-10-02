@@ -1,10 +1,10 @@
-import React from 'react';
-import { Modal, Form, Input, Button, Select, Drawer } from 'antd';
+
+import {  Form, Input, Button, Select, Drawer } from 'antd';
 import { useEffect, useState } from 'react';
 import { products, brands, brandCategory } from '@service';
 const { Option } = Select;
 
-// eslint-disable-next-line react/prop-types
+
 const Index = ({ open, onClose, update, getData, categories }) => {
     const [form] = Form.useForm();
     const [filteredBrands, setFilteredBrands] = useState([])

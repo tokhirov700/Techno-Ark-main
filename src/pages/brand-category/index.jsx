@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Button, Input, Space, } from 'antd';
-import { DeleteOutlined, EditOutlined, EnterOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import { useNavigate, NavLink, useParams, useLocation } from 'react-router-dom'
+import { EditOutlined,  } from '@ant-design/icons';
+import { useNavigate,  useLocation } from 'react-router-dom'
 import { GlobalTable, } from '@components';
 import { BrandCategoryModal } from '@modals'
 import { brandCategory, brands } from '@service';
 import { ConfirmDelete } from '@confirmation';
 
 const Index = () => {
-    // const { id } = useParams();
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [update, setUpdate] = useState({});
@@ -70,7 +69,6 @@ const Index = () => {
             if (res.status === 200) {
                 setData(res?.data?.data?.brandCategories);
                 setTotal(res?.data?.data?.count)
-                // console.log(data);
 
             }
         } catch (error) {
@@ -82,11 +80,11 @@ const Index = () => {
         getData();
     }, [params]);
 
-    // =========== edit Data ===========
+
     const editData = (item) => {
         setUpdate(item);
         showModal()
-        // console.log(item);
+  
 
     };
 
@@ -105,8 +103,7 @@ const Index = () => {
             const res = await brands.get();
             const fetchedCategories = res?.data?.data?.brands;
             setParentbrand(fetchedCategories);
-            // console.log(parentBrand);
-
+         
         } catch (error) {
             console.log(error);
         }

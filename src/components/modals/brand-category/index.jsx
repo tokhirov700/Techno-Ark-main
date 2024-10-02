@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Modal, Form, Input, Button, Select } from 'antd';
 import { useEffect } from 'react';
 import { brandCategory } from '@service';
