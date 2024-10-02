@@ -11,7 +11,6 @@ export default defineConfig({
       { find: "@components", replacement: "/src/components"},
       { find: "@service", replacement: "/src/service"},
       { find: "@modals", replacement: "/src/components/modals"},
-      { find: "@confirmation", replacement: "/src/components/confirmation"},
     ]
   }
 })

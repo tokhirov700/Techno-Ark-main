@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Input, Space } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GlobalTable } from '@components';
 import { BrandCategoryModal } from '@modals';
 import { brandCategory, brands } from '@service';
-import { ConfirmDelete } from '@confirmation';
+import { ConfirmDelete } from '@components';
+
 
 const Index = () => {
     const [data, setData] = useState([]);
@@ -15,10 +16,11 @@ const Index = () => {
     const [total, setTotal] = useState();
     const [parentBrand, setParentbrand] = useState([]);
     const { search } = useLocation();
+    const navigate = useNavigate();
     const [params, setParams] = useState({
         search: "",
         limit: 2,
-        page: 1
+        page: 3,
     });
 
     useEffect(() => {
@@ -99,6 +101,18 @@ const Index = () => {
             search: e.target.value,
         }));
     };
+    const handleTableChange = (pagination) => {
+        const { current, pageSize } = pagination;
+        setParams((prev) => ({
+          ...prev,
+          limit: pageSize,
+          page: current,
+        }));
+        const searchParams = new URLSearchParams(search);
+        searchParams.set("page", `${current}`);
+        searchParams.set('limit', `${pageSize}`);
+        navigate(`?${searchParams}`);
+      };
 
     const columns = [
         {
@@ -165,6 +179,7 @@ const Index = () => {
                     showSizeChanger: true,
                     pageSizeOptions: ['2', '3', '4', '6']
                 }}
+                handleChange={handleTableChange}
             />
         </>
     );

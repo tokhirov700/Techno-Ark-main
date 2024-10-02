@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { GlobalTable } from '@components';
 import { CategoriesModal } from '@modals';
 import { category } from '@service';
-import { ConfirmDelete } from '@confirmation';
+import { ConfirmDelete } from '@components';
 
 const Index = () => {
   const [data, setData] = useState([]);

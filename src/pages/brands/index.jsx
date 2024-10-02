@@ -5,8 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { GlobalTable } from '@components';
 import { BrandsModal } from '@modals';
 import { brands, category } from '@service';
-import { ConfirmDelete } from '@confirmation';
-
+import { ConfirmDelete } from '@components';
 const Index = () => {
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
