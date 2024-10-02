@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Button, Input, Space, } from 'antd';
-import { EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { EditOutlined,  } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom'
 import { GlobalTable, } from '@components';
 import { ProductsModal } from '@modals'
-import { brandCategory, brands, category, products } from '@service';
+import { category, products } from '@service';
 import { ConfirmDelete } from '@confirmation';
 
 const Index = () => {
-    // const { id } = useParams();
     const [data, setData] = useState([]);
     const [open, setOpen] = useState(false);
     const [update, setUpdate] = useState({});
@@ -22,7 +21,6 @@ const Index = () => {
         page: 1
     })
 
-    //    ============ Drawer ==========
     const showDrawer = () => {
         setOpen(true);
     };
@@ -31,7 +29,6 @@ const Index = () => {
     };
 
 
-    //========= get from query =========
     useEffect(() => {
         const params = new URLSearchParams(search)
         let page = Number(params.get("page")) || 1
@@ -44,7 +41,7 @@ const Index = () => {
     }, [search])
 
 
-    // ============ Table ==============
+
     const handleTableChange = (pagination) => {
         const { current, pageSize } = pagination
         setParams((prev) => ({
@@ -59,14 +56,13 @@ const Index = () => {
         navigate(`?${searchParams}`)
     }
 
-    // ============ get Data ============
     const getData = async () => {
         try {
             const res = await products.get(params);
             if (res.status === 200) {
                 setData(res?.data?.data?.products);
                 setTotal(res?.data?.data?.count)
-                // console.log(data);
+    
 
             }
         } catch (error) {
@@ -78,7 +74,7 @@ const Index = () => {
         getData();
     }, [params]);
 
-    // =========== edit Data ===========
+   
     const editData = (item) => {
         setUpdate(item);
         showDrawer()
@@ -87,7 +83,6 @@ const Index = () => {
     };
 
 
-    // ======== delete Data ========= 
     const deleteData = async (id) => {
         const res = await products.delete(id);
         if (res.status === 200) {
@@ -95,23 +90,18 @@ const Index = () => {
         }
     };
 
-const handleView = ()=>{
-    console.log("product detail");
-     
-    
-}
 
 
 
 
 
-    //========= get categories  ============
+
+
     const getCategories = async () => {
         try {
             const res = await category.get();
             const fetchedData = res?.data?.data?.categories;
             setCategories(fetchedData);
-            // console.log(categories, "categories");
 
         } catch (error) {
             console.log(error);
@@ -147,7 +137,6 @@ const handleView = ()=>{
                         onCancel={() => console.log('Cancelled')}
                         title={"Delete this Product ?"}
                     />
-                    <Button onClick={() => handleView(record)}><EyeOutlined /></Button>
                 </Space>
             ),
         },

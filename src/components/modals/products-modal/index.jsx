@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { products, brands, brandCategory } from '@service';
 const { Option } = Select;
 
+// eslint-disable-next-line react/prop-types
 const Index = ({ open, onClose, update, getData, categories }) => {
     const [form] = Form.useForm();
     const [filteredBrands, setFilteredBrands] = useState([])
@@ -28,10 +29,9 @@ const Index = ({ open, onClose, update, getData, categories }) => {
     }, [update, form])
 
 
-    // ===========file ==========
+
     const handleChange = async (value, inputName) => {
-        // let fileData = event.target.files[0]
-        // setFile(fileData);
+      
         try {
             if (inputName === "category_id") {
                 const res = await brands.getBrands(value)
