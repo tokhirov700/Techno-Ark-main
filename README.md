@@ -9,6 +9,9 @@ Currently, two official plugins are available:
 
 
 
-2 confirmation uchun alice to'gri yozish 
-5 Searchga query params yozish 
-6 Hamma searchlarni ishlatib chiqish kerak 
+1 confirmation uchun alice to'gri yozish  
+2 date formatlash ✅
+3 Nomirofkani tugri yozish kerak ✅
+4 Product tug'gri yozish kerak ✅
+5 Searchga query params yozish ✅
+6 Hamma searchlarni ishlatib chiqish kerak ✅
