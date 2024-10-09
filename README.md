@@ -9,9 +9,13 @@ Currently, two official plugins are available:
 
 
 
-1 confirmation uchun alice to'gri yozish  
-2 date formatlash ✅
-3 Nomirofkani tugri yozish kerak ✅
-4 Product tug'gri yozish kerak ✅
-5 Searchga query params yozish ✅
-6 Hamma searchlarni ishlatib chiqish kerak ✅
+1 confirmation uchun alice to'gri yozish    ✅ 
+2 date formatlash                           ✅
+3 Nomirofkani tugri yozish kerak            ✅
+4 Product tug'gri yozish kerak              ✅
+5 Searchga query params yozish              ✅
+6 Hamma searchlarni ishlatib chiqish kerak  ✅
+7 Log out qushish kerak                     ✅
+8 Notifaciton qushish kerak                 ✅
+9 add cofirmatinon for log out              ✅
+10 Add filter fuction      

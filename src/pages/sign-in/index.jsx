@@ -1,27 +1,32 @@
-import React from 'react';
-import axios from 'axios'
-import { Button, Checkbox, Form, Input, Typography } from 'antd';
+import { Button, Form, Input, Typography } from 'antd';
 import LoginImg from '../../assets/login-img.jpg';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '@service';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Index = () => {
     const { Link } = Typography;
-    const navigate = useNavigate()
-
-    // phone_number: '+998977770777', password: 'MaxFax'
+    const navigate = useNavigate();
 
     const onFinish = async (values) => {
         console.log('Received values of form: ', values);
         try {
-            const response = await auth.sign_in(values)
+            const response = await auth.sign_in(values);
             console.log(response);
-            const access_token = response?.data?.data?.tokens?.access_token
-            // console.log(acces_token);
-            localStorage.setItem("access_token", access_token)
-            navigate("/admin-panel")
+
+        
+            if (response?.status === 200 || response?.status === 201) {
+                const access_token = response?.data?.data?.tokens?.access_token;
+                localStorage.setItem("access_token", access_token);
+                toast.success("Login successful!");
+                navigate("/admin-panel");
+            } else {
+                throw new Error("Unexpected response status");
+            }
         } catch (error) {
             console.log(error);
-
+            toast.error("Login failed! Please check your credentials.");
         }
     };
 
@@ -43,11 +48,9 @@ const Index = () => {
                                 width: "340px",
                                 display: "flex",
                                 flexDirection: "column",
-
                             }}
                             onFinish={onFinish}
                         >
-
                             <div>
                                 <Form.Item
                                     label="Phone number"
@@ -70,7 +73,6 @@ const Index = () => {
                                     label="Password"
                                     name="password"
                                     labelCol={{ span: 24 }}
-                                    // labelRow={{ span: 10 }}
                                     wrapperCol={{ span: 24 }}
                                     style={{ marginBottom: '8px' }}
                                     rules={[
@@ -84,13 +86,12 @@ const Index = () => {
                                 </Form.Item>
                             </div>
 
-
                             <Form.Item>
                                 <Button block type='submit' htmlType="submit" style={{ backgroundColor: "#e35112", color: "white", height: "40px", fontSize: "18px", marginTop: "10px" }}>
                                     Sign In
                                 </Button>
                                 <Typography variant="body2" align="center" style={{ marginTop: "10px", }} />
-                                Don't you have an account?
+                                Dont you have an account?
                                 <Link href="/" style={{ marginLeft: "10px", fontSize: "18px", fontFamily: "serif" }}>
                                     Sign Up
                                 </Link>
@@ -99,6 +100,8 @@ const Index = () => {
                     }
                 </div>
             </div>
+            {/* Toast container to display notifications */}
+            <ToastContainer />
         </>
     );
 };

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme } from 'antd';
-import { NavLink, useLocation, Outlet } from 'react-router-dom';
+import { Button, Layout, Menu, theme, Modal } from 'antd';
+import { NavLink, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import { adminRights } from '../../router/routes';
 import MainLogo from '../../assets/texnoark-logo.svg';
 
@@ -14,16 +15,32 @@ const { Item } = Menu;
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const {
     token: { colorBgContainer, borderRadiusLG, darkDangerItemActiveBg },
   } = theme.useToken();
+
+
+  const showLogoutConfirm = () => {
+    Modal.confirm({
+      title: 'Confirm Logout',
+      content: 'Are you sure you want to log out?',
+      onOk: handleLogout,
+      onCancel() {},
+    });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token"); 
+    navigate('/');
+  };
 
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed} width={260}>
         <div className="demo-logo-vertical" />
         
-        {/* Logo rasm doim ko'rinadi, faqat matn ochilganda paydo bo'ladi */}
+
         <div className='flex p-4 gap-2 font-semibold mb-2'>
           <img src={MainLogo} alt="main-logo" />
           {!collapsed && (
@@ -35,7 +52,6 @@ const App = () => {
           theme="dark"
           mode="inline"
           selectedKeys={[pathname]}>
-
           {adminRights?.map((item) => (
             <Item key={item.path} icon={item.icon}>
               <NavLink to={item.path} style={{ fontSize: "18px" }}>{item.label}</NavLink>
@@ -48,6 +64,9 @@ const App = () => {
           style={{
             padding: 0,
             background: colorBgContainer,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
           }}
         >
           <Button
@@ -60,6 +79,18 @@ const App = () => {
               height: 64,
             }}
           />
+          
+          <Button
+            type="text"
+            icon={<LogoutOutlined />}
+            onClick={showLogoutConfirm}
+            style={{
+              fontSize: '16px',
+              marginRight: '16px',
+            }}
+          >
+            Logout
+          </Button>
         </Header>
         <Content
           style={{
